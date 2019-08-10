@@ -42,10 +42,10 @@ class DiContainerTutorial {
         ApplicationContext context;
 
         /*
-        デフォルトではComponentはsingletonスコープで管理されます。
-        都度インスタンスを生成したい場合は@Scopeアノテーションを使ってprototypeスコープで管理するようにします。
-
-        Webアプリケーションの場合はrequestスコープやsessionスコープといったライフサイクルを指定することもできます。
+         * デフォルトではComponentはsingletonスコープで管理されます。
+         * 都度インスタンスを生成したい場合は@Scopeアノテーションを使ってprototypeスコープで管理するようにします。
+         *
+         * Webアプリケーションの場合はrequestスコープやsessionスコープといったライフサイクルを指定することもできます。
          */
         @Test
         void countUp() {
@@ -58,6 +58,25 @@ class DiContainerTutorial {
             countUpService2.increment();
             assertThat(countUpService2.currentCount()).isEqualTo(1);
         }
+    }
 
+    @Nested
+    @SpringBootTest
+    class ProxyTest {
+        @Autowired
+        SingletonComponent component;
+
+        /*
+         * Singletonなコンポーネント内でPrototypeなコンポーネントをAutowiredすると、PrototypeなコンポーネントがSingletonなコンポーネントに引きずられて
+         * Prototypeなコンポーネントのインスタンスが入れ替わらない
+         *
+         * ScopeのproxyModeにTARGET_CLASSを指定すると、注入するクラスがProxyで包まれて都度新しいインスタンスをDIコンテナから取り出す挙動になる。
+         */
+        @Test
+        void testGenerateRandomString() {
+            String first = component.generateRandomString();
+            String second = component.generateRandomString();
+            assertThat(first).isNotEqualTo(second);
+        }
     }
 }
