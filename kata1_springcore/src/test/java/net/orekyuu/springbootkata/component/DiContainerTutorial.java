@@ -2,10 +2,9 @@ package net.orekyuu.springbootkata.component;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.context.ApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,5 +33,31 @@ class DiContainerTutorial {
         void 足し算() {
             assertThat(sumService.sum(1, 2)).isEqualTo(3);
         }
+    }
+
+    @Nested
+    @SpringBootTest
+    class CountUpServiceTest {
+        @Autowired
+        ApplicationContext context;
+
+        /*
+        デフォルトではComponentはsingletonスコープで管理されます。
+        都度インスタンスを生成したい場合は@Scopeアノテーションを使ってprototypeスコープで管理するようにします。
+
+        Webアプリケーションの場合はrequestスコープやsessionスコープといったライフサイクルを指定することもできます。
+         */
+        @Test
+        void countUp() {
+            CountUpService countUpService1 = context.getBean(CountUpService.class);
+            countUpService1.increment();
+
+            assertThat(countUpService1.currentCount()).isEqualTo(1);
+
+            CountUpService countUpService2 = context.getBean(CountUpService.class);
+            countUpService2.increment();
+            assertThat(countUpService2.currentCount()).isEqualTo(1);
+        }
+
     }
 }
