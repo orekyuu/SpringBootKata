@@ -79,4 +79,17 @@ class DiContainerTutorial {
             assertThat(first).isNotEqualTo(second);
         }
     }
+
+    @Nested
+    @SpringBootTest
+    class ConfigurationTest {
+        @Autowired
+        MessageDecorator decorator;
+
+        @Test
+        void testDecoratedMessage() {
+            String message = decorator.createDecoratedMessage();
+            assertThat(message).isEqualTo("[test message]");
+        }
+    }
 }
