@@ -1,2 +1,3 @@
 rootProject.name = 'spring-boot-kata'
 include 'kata1_springcore'
+include 'kata2_springmvc'
