@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
-    <link rel="stylesheet" href="../../static/style/base.css">
+    <link rel="stylesheet" href="../../static/style/base.css" th:href="@{/style/base.css}">
 </head>
 <body>
 <div class="wrapper">
     <div class="content">
         <div class="content-header">ユーザー一覧</div>
         <div class="content-body">
-            <ul class="users">
+            <ul class="users" th:remove="all-but-first">
                 <!--
                 hint: https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf_ja.html#%E3%83%AA%E3%83%B3%E3%82%AFurl
                 hint: https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf_ja.html#%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%83%95%E3%83%A9%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E5%89%8A%E9%99%A4
                 -->
-                <li><a href="/users/1">ユーザー1</a></li>
+                <li th:each="u : ${users}"><a href="/users/1" th:href="@{/users/{id}(id=${u.id})}" th:text="${u.name}">ユーザー1</a></li>
                 <li><a href="/users/2">ユーザー2</a></li>
             </ul>
         </div>

@@ -2,8 +2,8 @@ package net.orekyuu.springbootkata.presentation.controller;
 
 import net.orekyuu.springbootkata.domain.model.user.User;
 import net.orekyuu.springbootkata.infrastructure.inmemory.InMemoryUserRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,19 +17,26 @@ public class SampleRestController {
         this.repository = repository;
     }
 
-    public void show(long id) {
+    @GetMapping("{id}")
+    public User show(@PathVariable long id) {
         User user = repository.findById(id).orElse(null);
+        return user;
     }
 
-    public void list() {
+    @GetMapping
+    public List<User> list() {
         List<User> users = repository.findAll();
+        return users;
     }
 
-    public void delete(long id) {
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable long id) {
         repository.remove(id);
     }
 
-    public void update(long id, String name) {
+    @PutMapping("{id}")
+    public void update(@PathVariable long id, @RequestParam String name) {
         User user = new User(id, name);
         repository.save(user);
     }
