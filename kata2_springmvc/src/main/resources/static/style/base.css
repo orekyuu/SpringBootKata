@@ -1,0 +1,58 @@
+html {
+    background-color: #f8f9f9;
+}
+
+.wrapper {
+    width: 980px;
+    margin: 0 auto;
+}
+
+.content {
+    background-color: white;
+    margin: 64px auto;
+    width: 100%;
+}
+
+.content-header {
+    width: 100%;
+    background-color: #17202a;
+    color: #f8f9f9;
+    padding: 16px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.content-body {
+    padding: 32px;
+}
+
+input, button, select, option {
+    border: #a6acaf solid 1px;
+    background-color: white;
+    padding: 3px;
+    font-size: 14px;
+}
+
+input[type=submit], button[type=submit] {
+    color: #f8f9f9;
+    background-color: #3498db;
+    text-align: center;
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-top: 16px;
+}
+
+input[type=submit]:hover, button[type=submit]:hover {
+    background-color: #5dade2;
+}
+
+table.details-table {
+    vertical-align: middle;
+}
+
+table.details-table>tbody>tr> th::after {
+    display: inline-block;
+    margin-left: 4px;
+    content: ":";
+}
