@@ -4,9 +4,9 @@ import net.orekyuu.springbootkata.domain.model.user.User;
 import net.orekyuu.springbootkata.infrastructure.inmemory.InMemoryUserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,5 +33,20 @@ public class ThymeleafController {
         // テンプレートはresources/templates/users/list.htmlに入ってます
         model.addAttribute("users", users);
         return "users/list";
+    }
+
+    @GetMapping("registration")
+    public String showRegistration() {
+        return "users/registration";
+    }
+
+    @PostMapping("registration")
+    public String registration(NewUser newUser) {
+        repository.save(newUser.toUser());
+        return "";
+    }
+
+    public NewUser newUser() {
+        return new NewUser();
     }
 }

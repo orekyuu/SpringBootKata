@@ -56,3 +56,25 @@ table.details-table>tbody>tr> th::after {
     margin-left: 4px;
     content: ":";
 }
+
+.input-group {
+    display: flex;
+    align-items: baseline;
+}
+
+.input-group > label {
+    min-width: 150px;
+    margin: 10px;
+}
+
+.input-group > div {
+    flex: 1;
+}
+
+.input-group > div > input {
+    width: 100%;
+}
+
+.error {
+    color: red;
+}

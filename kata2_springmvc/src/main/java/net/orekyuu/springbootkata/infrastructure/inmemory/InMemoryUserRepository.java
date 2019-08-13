@@ -13,6 +13,9 @@ public class InMemoryUserRepository {
     private static ConcurrentHashMap<Long, User> storage = new ConcurrentHashMap<>();
 
     public void save(User user) {
+        if (user.getId() == null) {
+            user = new User(nextId(), user.getName());
+        }
         storage.put(user.getId(), user);
     }
 
@@ -30,5 +33,10 @@ public class InMemoryUserRepository {
 
     public List<User> findAll() {
         return new ArrayList<>(storage.values());
+    }
+
+    private long nextId() {
+        long max = storage.values().stream().mapToLong(User::getId).max().orElse(0);
+        return max + 1;
     }
 }
