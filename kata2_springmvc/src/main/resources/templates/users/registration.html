@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="../../static/style/base.css" th:href="@{/style/base.css}">
+</head>
+<body>
+<div class="wrapper">
+    <div class="content">
+        <div class="content-header">ユーザー登録</div>
+        <div class="content-body">
+            <form action="" method="post">
+                <div class="input-group">
+                    <label for="name">ユーザー名:</label>
+                    <div>
+                        <input id="name" type="text">
+                        <p class="error">error message</p>
+                    </div>
+                </div>
+                <button type="submit">作成</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
