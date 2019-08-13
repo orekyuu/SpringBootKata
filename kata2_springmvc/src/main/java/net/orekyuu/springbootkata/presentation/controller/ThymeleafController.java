@@ -41,11 +41,16 @@ public class ThymeleafController {
     }
 
     @PostMapping("registration")
-    public String registration(NewUser newUser) {
+    public String registration(@Validated @ModelAttribute("newUser") NewUser newUser, BindingResult result) {
+        if (result.hasErrors()) {
+            return "users/registration";
+        }
+
         repository.save(newUser.toUser());
-        return "";
+        return "redirect:/users";
     }
 
+    @ModelAttribute("newUser")
     public NewUser newUser() {
         return new NewUser();
     }

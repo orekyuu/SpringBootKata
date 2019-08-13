@@ -11,12 +11,12 @@
     <div class="content">
         <div class="content-header">ユーザー登録</div>
         <div class="content-body">
-            <form action="" method="post">
+            <form action="" method="post" th:action="@{/users/registration}" th:object="${newUser}">
                 <div class="input-group">
                     <label for="name">ユーザー名:</label>
                     <div>
-                        <input id="name" type="text">
-                        <p class="error">error message</p>
+                        <input id="name" type="text" th:field="*{name}">
+                        <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error message</p>
                     </div>
                 </div>
                 <button type="submit">作成</button>
