@@ -84,4 +84,14 @@ public class Kata1Controller {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello orekyuu"));
     }
+
+    @Test
+    void exceptionHandler() throws Exception {
+        // Please implementation.
+        // net.orekyuu.springbootkata.presentation.controller.SampleController#handleNotFoundException()
+        // hint: https://www.baeldung.com/spring-request-param
+        mockMvc.perform(post("/hello/hello"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("invalid parameter"));
+    }
 }

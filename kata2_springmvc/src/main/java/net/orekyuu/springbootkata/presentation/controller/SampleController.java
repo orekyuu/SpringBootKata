@@ -34,6 +34,13 @@ public class SampleController {
 
     @PostMapping("/hello/{name}")
     public ResponseEntity<String> helloMessageFromPath(@PathVariable String name) {
+        if (name.equals("hello")) {
+            throw new InvalidParameterException();
+        }
         return ResponseEntity.ok("Hello " + name);
+    }
+
+    public ResponseEntity<String> invalidParameterErrorResponse(InvalidParameterException e) {
+        return ResponseEntity.badRequest().body("invalid parameter");
     }
 }
