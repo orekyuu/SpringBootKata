@@ -40,6 +40,7 @@ public class SampleController {
         return ResponseEntity.ok("Hello " + name);
     }
 
+    @ExceptionHandler(InvalidParameterException.class)
     public ResponseEntity<String> invalidParameterErrorResponse(InvalidParameterException e) {
         return ResponseEntity.badRequest().body("invalid parameter");
     }
