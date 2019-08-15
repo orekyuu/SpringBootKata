@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.InvalidParameterException;
 import java.util.List;
 
 @Controller
@@ -29,6 +30,13 @@ public class SampleController {
     }
 
     public ResponseEntity<String> helloMessageFromPath(String name) {
+        if (name.equals("hello")) {
+            throw new InvalidParameterException();
+        }
         return null;
+    }
+
+    public ResponseEntity<String> invalidParameterErrorResponse(InvalidParameterException e) {
+        return ResponseEntity.badRequest().body("invalid parameter");
     }
 }
